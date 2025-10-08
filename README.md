@@ -1,4 +1,4 @@
-# Mock-Mate: AI-Powered Mock Interview Platform
+# Mock-Mate: JAVA Based Mock Interview Platform
 
 Mock-Mate is a comprehensive web-based platform that simulates technical and behavioral mock interviews for students preparing for campus placements. It provides coding tests, HR interview practice, automatic feedback, analytics, and peer-to-peer sessions.
 
@@ -243,3 +243,4 @@ For support, email support@mockmate.com or join our Discord community.
 ---
 
 **Mock-Mate** - Master your technical interviews with AI-powered practice sessions! 🚀
+
