@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mockmate-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mockmate
+      MYSQL_USER: mockmate
+      MYSQL_PASSWORD: mockmate123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mockmate-network
+
+  backend:
+    build: ./backend
+    container_name: mockmate-backend
+    environment:
+      DB_USERNAME: mockmate
+      DB_PASSWORD: mockmate123
+      JWT_SECRET: mockmate-secret-key-that-is-very-long-and-secure-for-production
+      MAIL_HOST: smtp.gmail.com
+      MAIL_PORT: 587
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - mockmate-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: mockmate-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - mockmate-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  mockmate-network:
+    driver: bridge
